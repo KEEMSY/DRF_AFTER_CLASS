@@ -10,7 +10,13 @@ class Article(models.Model):
     content = models.TextField("글 내용")
     category = models.ManyToManyField("Category", verbose_name="카테고리")
 
+    def __str__(self):
+        return self.title
+
 
 class Category(models.Model):
-    name = models.CharField("카테고리 제목")
-    bio = models.CharField("설명")
+    name = models.CharField("카테고리 제목", max_length=100)
+    bio = models.CharField("설명", max_length=150)
+
+    def __str__(self):
+        return self.name
