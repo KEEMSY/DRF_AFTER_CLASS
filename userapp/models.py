@@ -65,3 +65,15 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(to=User, verbose_name="사용자", on_delete=models.CASCADE)
+    interest = models.ManyToManyField(to="Interest", verbose_name="관심사")
+    bio = models.TextField("자기소개")
+    birthday = models.DateField("생일")
+    age = models.IntegerField("나이")
+
+
+class Interest(models.Model):
+    name = models.CharField("관심사", max_length=50)
