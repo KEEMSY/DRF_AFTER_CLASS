@@ -2,6 +2,8 @@ from django.db import models
 
 
 # Create your models here.
+
+
 class Enterprise(models.Model):
     company_name = models.CharField("기업 계정", max_length=100)
     email = models.EmailField("이메일주소", max_length=100, unique=True)
@@ -10,11 +12,11 @@ class Enterprise(models.Model):
 
 
 class EnterpriseProfile(models.Model):
-    enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE, verbose_name='기업명')
+    enterprise = models.OneToOneField(to=Enterprise, verbose_name="기업", on_delete=models.CASCADE)
     introduction = models.TextField()
-    place = models.CharField("근무지", max_length=100)
+    place = models.ManyToManyField(to="Place", verbose_name='지역')
     phone_number = models.IntegerField("기업 전화번호")
 
 
-class Field(models.Model):
-    name = models.CharField("모집 분야", max_length=100)
+class Place(models.Model):
+    name = models.CharField("지역", max_length=50)
