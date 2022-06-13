@@ -11,4 +11,4 @@ class CanWriteAfter3Days(BasePermission):
 
 class CanWriteAfter3Min(BasePermission):
     def has_permission(self, request, view):
-        bool(request.user and request.user.join_date < (timezone.now() - timedelta(minutes=3)))
+        return bool(request.user and request.user.join_date < (timezone.now() - timedelta(minutes=3)))

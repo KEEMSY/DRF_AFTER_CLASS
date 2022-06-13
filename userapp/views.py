@@ -10,6 +10,9 @@ from rest_framework.views import APIView
 class UserApiView(APIView):
     permission_classes = [permissions.AllowAny]
 
+    def get(self,request):
+
+
     # 로그인
     def post(self, request):
         username = request.data.get('username', '')
