@@ -13,9 +13,10 @@ class TestView(APIView):
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.AllowAny]
 
+
     # permission_classes = [IsOwnerOnlyOrReadOnly]
     def get(self, request):
-        return Response({'msg': 'get method'})
+        return Response({'msg': 'get method'}, template_name='userapp/login')
 
     def post(self, request):
         return Response({'msg': 'post method'})
