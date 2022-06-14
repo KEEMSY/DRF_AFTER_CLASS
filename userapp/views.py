@@ -7,6 +7,8 @@ from rest_framework import status, permissions, authentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from blog.models import Article
+from blog.serializers import ArticleSerializer
 from userapp.serializers import UserSerializer
 
 
@@ -30,6 +32,14 @@ class UserView(APIView):
     def get(self, requeset):
         user = requeset.user
         if not isinstance(user, AnonymousUser):
-            return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+            user_data = UserSerializer(user).data
+            article_data = Article.objects.filter(user=user.id)
+            article_data = ArticleSerializer(article_data,many=True).data
+            print(article_data)
+            data = {
+                "user_data": user_data,
+                "article_data": article_data
+            }
+            return Response(data=data, status=status.HTTP_200_OK)
         else:
             return Response({'msg': "AnonymousUser 입니다."})

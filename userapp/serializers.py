@@ -36,6 +36,5 @@ class UserSerializer(serializers.ModelSerializer):
                     'required': '이메일을 입력해주세요',
                     'invalid': '알맞은 형식의 이메일을 입력하세요',
                 }
-
             }
         }
