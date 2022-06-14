@@ -6,6 +6,8 @@ from rest_framework import status, permissions, authentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from userapp.serializers import UserSerializer
+
 
 class UserApiView(APIView):
     permission_classes = [permissions.AllowAny]
@@ -21,3 +23,9 @@ class UserApiView(APIView):
 
         login(request, user)
         return Response({"message": "로그인 성공!!"}, status=status.HTTP_200_OK)
+
+
+class UserView(APIView):
+    def get(self, requeset):
+        user = requeset.user
+        return Response(UserSerializer(user).data, status=status.HTTP_200_OK)

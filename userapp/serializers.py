@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from userapp.models import User
+from userapp.models import User, UserProfile
 
 
-class UserSerializers(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
@@ -11,7 +11,16 @@ class UserSerializers(serializers.ModelSerializer):
         extra_kwargs = {
             "password": {'write_only': True},
             "email": {
-                'required': '이메일을 입력해주세요',
-                'invalid': '알맞은 형식의 이메일을 입력하세요',
+                "error_messages": {
+                    'required': '이메일을 입력해주세요',
+                    'invalid': '알맞은 형식의 이메일을 입력하세요',
+                }
+
             }
         }
+
+# class UserProfileSerializer(serializers.ModelSerializer):
+#
+#     class Meta:
+#         model = UserProfile
+#         fields = []
