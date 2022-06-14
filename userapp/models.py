@@ -75,7 +75,8 @@ class UserProfile(models.Model):
     age = models.IntegerField("나이")
 
     def __str__(self):
-        return self.user
+        return self.bio
+
 
 class Interest(models.Model):
     name = models.CharField("관심사", max_length=50)

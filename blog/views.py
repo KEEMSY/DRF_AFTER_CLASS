@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from blog.permission import CanWriteAfter3Days, CanWriteAfter3Min
+from blog.permissions import CanWriteAfter3Days, CanWriteAfter3Min
 
 
 class ArticleApiView(APIView):

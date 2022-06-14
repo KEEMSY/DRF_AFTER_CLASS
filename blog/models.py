@@ -20,3 +20,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.CharField('댓글', max_length=256)
+    created_at = models.DateTimeField(auto_now_add=True)

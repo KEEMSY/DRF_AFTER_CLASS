@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render
 
 # Create your views here.
@@ -6,12 +7,13 @@ from rest_framework import status, permissions, authentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from blog.models import Article
+from blog.serializers import ArticleSerializer
+from userapp.serializers import UserSerializer
+
 
 class UserApiView(APIView):
     permission_classes = [permissions.AllowAny]
-
-    def get(self,request):
-
 
     # 로그인
     def post(self, request):
@@ -24,3 +26,12 @@ class UserApiView(APIView):
 
         login(request, user)
         return Response({"message": "로그인 성공!!"}, status=status.HTTP_200_OK)
+
+
+class UserView(APIView):
+    def get(self, requeset):
+        user = requeset.user
+        if not isinstance(user, AnonymousUser):
+            return Response(UserSerializer(user).data)
+        else:
+            return Response({'msg': "AnonymousUser 입니다."})
