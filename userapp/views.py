@@ -32,13 +32,6 @@ class UserView(APIView):
     def get(self, requeset):
         user = requeset.user
         if not isinstance(user, AnonymousUser):
-            user_data = UserSerializer(user).data
-            article_data = Article.objects.filter(user=user.id)
-            article_data = ArticleSerializer(article_data, many=True).data
-            data = {
-                "user_data": user_data,
-                "article_data": article_data
-            }
-            return Response(data=data, status=status.HTTP_200_OK)
+            return Response(UserSerializer(user).data)
         else:
             return Response({'msg': "AnonymousUser 입니다."})

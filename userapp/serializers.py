@@ -1,11 +1,13 @@
 from rest_framework import serializers
 
+from blog.serializers import ArticleSerializer
 from userapp.models import User, UserProfile, Interest
 
 
 class InterestSerializer(serializers.ModelSerializer):
     same_interest_users = serializers.SerializerMethodField()
-    def get_same_interest_users(self,obj):
+
+    def get_same_interest_users(self, obj):
         user_list = []
         for user_profile in obj.userprofile_set.all():
             user_list.append(user_profile.user.username)
@@ -25,10 +27,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     userprofile = UserProfileSerializer()
+    articles = ArticleSerializer(many=True, source="article_set")
 
     class Meta:
         model = User
-        fields = ["username", "email", "password", "fullname", "userprofile"]
+        fields = ["username", "email", "password", "fullname", "userprofile", "articles"]
         extra_kwargs = {
             "password": {'write_only': True},
             "email": {
