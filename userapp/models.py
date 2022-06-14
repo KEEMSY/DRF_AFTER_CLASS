@@ -77,6 +77,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user
 
+
 class Interest(models.Model):
     name = models.CharField("관심사", max_length=50)
 
