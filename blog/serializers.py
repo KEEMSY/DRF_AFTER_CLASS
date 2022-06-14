@@ -8,8 +8,10 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ["name", "bio"]
 
+
 class ArticleSerializer(serializers.ModelSerializer):
     category = CategorySerializer(many=True)
+
     class Meta:
         model = Article
         fields = ["title", "content", "category", "user", "category"]

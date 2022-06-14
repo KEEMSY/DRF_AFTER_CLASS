@@ -20,7 +20,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = "__all__"
+        fields = ["interest", "bio", "birthday", "age"]
 
 
 class UserSerializer(serializers.ModelSerializer):

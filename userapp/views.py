@@ -34,8 +34,7 @@ class UserView(APIView):
         if not isinstance(user, AnonymousUser):
             user_data = UserSerializer(user).data
             article_data = Article.objects.filter(user=user.id)
-            article_data = ArticleSerializer(article_data,many=True).data
-            print(article_data)
+            article_data = ArticleSerializer(article_data, many=True).data
             data = {
                 "user_data": user_data,
                 "article_data": article_data
