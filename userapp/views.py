@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render
 
 # Create your views here.
@@ -28,4 +29,7 @@ class UserApiView(APIView):
 class UserView(APIView):
     def get(self, requeset):
         user = requeset.user
-        return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+        if not isinstance(user, AnonymousUser):
+            return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
+        else:
+            return Response({'msg': "AnonymousUser 입니다."})
