@@ -15,7 +15,7 @@ DRF 연습을 기록하는 곳입니다.
 
 <hr>
 
-### userapp
+### `userapp`
 유저에 관한 기능들이 모여있는 앱입니다.
 
 
@@ -41,7 +41,7 @@ DRF 연습을 기록하는 곳입니다.
 
 <hr>
 
-### blog
+### `blog`
 게시글에 관련된 기능들이 모여있는 앱입니다.
 > **[Models](https://github.com/KEEMSY/DRF_AFTER_CLASS/blob/main/blog/models.py)**
 - Article
@@ -72,7 +72,7 @@ DRF 연습을 기록하는 곳입니다.
 
 <hr>
 
-### assignment
+### `assignment`
 DRF 사용을 연습하는 앱입니다.
 
 <br>
@@ -80,7 +80,7 @@ DRF 사용을 연습하는 앱입니다.
 <hr>
 
 ## 설치
-###1. 터미널
+### 1. 터미널
 
 >`pip install django` <br>
 `pip install djangorestframework`
@@ -106,7 +106,7 @@ REST_FRAMEWORK = {
  
 <hr>
 
-##POSTMAN 관련
+## POSTMAN 관련
 ### 1. POST / PUT / DELETE 통신 시 csrf error가 발생 시
 
 *1. Tests에 코드 추가* 
