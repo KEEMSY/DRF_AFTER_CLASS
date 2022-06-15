@@ -106,27 +106,17 @@ REST_FRAMEWORK = {
  
 <hr>
 
-## POSTMAN 관련
-### 1. POST / PUT / DELETE 통신 시 csrf error가 발생 시
+<div align=center>
+    <p>
+    <a href="https://github.com/KEEMSY/DRF_AFTER_CLASS/wiki">세부공부기록</a>    
+    </p>
+</div>
 
-*1. Tests에 코드 추가* 
->`var xsrfCookie = postman.getResponseCookie("csrftoken");
-postman.setGlobalVariable('csrftoken', xsrfCookie.value);` 
-<br> 
-> 
-> <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbubzlV%2FbtrEQSVVouv%2FSMXK2QdxnGrOqFkiIdpFjk%2Fimg.png">
 
-*2. Headers에 Key/Value 추가*
 
->Key : `X-CSRFToken` <br>
-Value : `{{csrftoken}}` 
-> <br>
-> 
-> <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbNkOvK%2FbtrEJIHAKp0%2FuXZLfgNgk5YjhDAmRhyDN1%2Fimg.png">
-
-<br>
 
 <hr>
+
 <div align=center>
     <p>
         <img src="https://img.shields.io/badge/Python-3.9-blue?logo=python&logoColor=white">
