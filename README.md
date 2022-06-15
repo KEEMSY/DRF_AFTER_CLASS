@@ -101,6 +101,12 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser'
     ]
 }
+
+INSTALLED_APP = [
+    .
+    .
+    'rest_framework', 
+
 ```
 <br>
  
