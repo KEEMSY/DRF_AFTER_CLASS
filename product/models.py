@@ -10,7 +10,7 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     effective_date = models.DateTimeField()
     expiration_date = models.DateTimeField()
-    active = models.BooleanField()
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
