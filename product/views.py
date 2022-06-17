@@ -11,14 +11,14 @@ from product.serializers import EventSerializer
 
 
 class ProductApiView(APIView):
-    permission_classes = [IsOwnerOnlyOrReadOnly]
+    permission_classes = []
 
     def get(self, request):
-        events = Event.objects.all()
-        return Response(EventSerializer(events, many=True), status=status.HTTP_200_OK)
+        events = EventSerializer(Event.objects.all(), many=True).data
+        return Response(events, status=status.HTTP_200_OK)
 
-    def post(self,request):
-        event_serializer = EventSerializer(request.data)
+    def post(self, request):
+        event_serializer = EventSerializer(data=request.data)
         if event_serializer.is_valid():
             event_serializer.save()
             return Response({"msg": "Event가 작성되었습니다."}, status=status.HTTP_200_OK)

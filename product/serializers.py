@@ -6,7 +6,7 @@ from product.models import Event
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ["title", "explanation", "effctive_date", "expirations_date"]
+        fields = ["title", "explanation", "effective_date", "expiration_date"]
 
 
 
