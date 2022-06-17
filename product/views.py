@@ -25,7 +25,7 @@ class ProductApiView(APIView):
         return Response(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, obj_id):
-        event = Event.objects.filter(id=obj_id)
+        event = Event.objects.get(id=obj_id)
         event_serializer = EventSerializer(event, data=request.data, partial=True)
         if event_serializer.is_valid():
             event_serializer.save()

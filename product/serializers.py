@@ -6,11 +6,11 @@ from product.models import Event
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ["title", "explanation", "effective_date", "expiration_date"]
+        fields = ["title", "explanation", "effective_date", "expiration_date", "active"]
 
     def update(self, instance, validated_data):
         for key, value in validated_data.items():
             setattr(instance, key, value)
         instance.save()
-
+        return instance
 
