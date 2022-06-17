@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -14,8 +16,11 @@ class ProductApiView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get(self, request):
-        events = EventSerializer(Event.objects.all(), many=True).data
-        return Response(events, status=status.HTTP_200_OK)
+        events = Event.objects.filter(effective_date__lte=datetime.now(),
+                                      expiration_date__gte=datetime.now(),
+                                      active=True)
+        valid_events = EventSerializer(events, many=True).data
+        return Response(valid_events, status=status.HTTP_200_OK)
 
     def post(self, request):
         event_serializer = EventSerializer(data=request.data)
