@@ -8,8 +8,8 @@ class Event(models.Model):
     thumbnail = models.ImageField("썸네일")
     explanation = models.CharField("설명", max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)
-    effective_data = models.DateTimeField()
-    expiration_data = models.DateTimeField()
+    effective_date = models.DateTimeField()
+    expiration_date = models.DateTimeField()
     active = models.BooleanField()
 
     def __str__(self):
