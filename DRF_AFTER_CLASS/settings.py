@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'assignmnet',
     'userapp',
     'blog',
+    'product'
 ]
 
 REST_FRAMEWORK = {
