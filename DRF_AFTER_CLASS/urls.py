@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('assignmnet.urls')),
     path('users/', include('userapp.urls')),
     path('blogs/', include('blog.urls')),
+    path('products/', include('blog.urls')),
 ]
