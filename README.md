@@ -10,6 +10,31 @@ DRF 연습을 기록하는 곳입니다.
 - [userapp](https://github.com/KEEMSY/DRF_AFTER_CLASS/tree/main/userapp)
 - [blog](https://github.com/KEEMSY/DRF_AFTER_CLASS/tree/main/blog)
 - [assignment](https://github.com/KEEMSY/DRF_AFTER_CLASS/tree/main/assignmnet)
+- [product](https://github.com/KEEMSY/DRF_AFTER_CLASS/tree/main/product)
+
+<br>
+
+<hr>
+
+
+
+### `product`
+product에 대한 기능이 모여있는 앱입니다.
+
+
+> **[Models](https://github.com/KEEMSY/DRF_AFTER_CLASS/blob/main/product/models.py)**
+- Event
+
+
+<br>
+
+> **[Serializers](https://github.com/KEEMSY/DRF_AFTER_CLASS/blob/main/product/serializers.py)**
+- EventSerialize
+
+<br>
+
+> **[Views](https://github.com/KEEMSY/DRF_AFTER_CLASS/blob/main/product/views.py)** (*APiView를 활용한 CBV*)
+- ProductApiView
 
 <br>
 
@@ -23,6 +48,7 @@ DRF 연습을 기록하는 곳입니다.
 - Custom user model 
 - UserProfile
 - Intertest
+
 
 <br>
 
