@@ -1,5 +1,6 @@
-from datetime import timezone, timedelta
+from datetime import timedelta
 
+from django.utils import timezone
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 

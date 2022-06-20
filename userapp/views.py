@@ -3,12 +3,10 @@ from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import status, permissions, authentication
+from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from blog.models import Article
-from blog.serializers import ArticleSerializer
 from userapp.serializers import UserSerializer
 
 

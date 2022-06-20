@@ -1,14 +1,13 @@
 from datetime import datetime
 
 from django.contrib.auth.models import AnonymousUser
-from django.shortcuts import render
 
 # Create your views here.
+from django.utils import timezone
 from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from assignmnet.permission import IsOwnerOnlyOrReadOnly
 from product.models import Event, Product
 from product.permissions import IsAuthenticatedANDWritableAfter3DaysOrReadOnly
 from product.serializers import EventSerializer, ProductSerializer
@@ -51,7 +50,7 @@ class ProductApiView(APIView):
             return Response(valid_products, status=status.HTTP_200_OK)
         else:
             products = Product.objects.filter(user_id=request.user.id,
-                                              expiration_date__gte=datetime.now(),
+                                              expiration_date__gte=timezone.now(),
                                               active=True)
             valid_products = ProductSerializer(products, many=True).data
             return Response(valid_products, status=status.HTTP_200_OK)
