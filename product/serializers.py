@@ -25,7 +25,7 @@ class ProductSerializer(serializers.ModelSerializer):
     def validate(self, data):
         if data.get("expiration_date") < datetime.now():
             raise serializers.ValidationError(
-                detail={"error": "상품을 등록할 수 없습니다."}
+                detail={"error": "날짜를 확인 해 주세요."}
             )
         return data
 
