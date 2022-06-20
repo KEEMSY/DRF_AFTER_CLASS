@@ -19,7 +19,7 @@ class EventSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ["content", "grade"]
+        fields = ["content", "grade", "user", "product"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
