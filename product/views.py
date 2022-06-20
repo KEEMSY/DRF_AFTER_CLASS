@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render
 
 # Create your views here.
@@ -9,6 +10,7 @@ from rest_framework.views import APIView
 
 from assignmnet.permission import IsOwnerOnlyOrReadOnly
 from product.models import Event, Product
+from product.permissions import IsAuthenticatedANDWritableAfter3DaysOrReadOnly
 from product.serializers import EventSerializer, ProductSerializer
 
 
@@ -39,14 +41,20 @@ class EventApiView(APIView):
 
 
 class ProductApiView(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedANDWritableAfter3DaysOrReadOnly]
 
     def get(self, request):
-        products = Product.objects.filter(user_id=request.user.id,
-                                          expiration_date__gte=datetime.now(),
-                                          active=True)
-        valid_products = ProductSerializer(products, many=True).data
-        return Response(valid_products, status=status.HTTP_200_OK)
+        user = request.user
+        if isinstance(user, AnonymousUser):
+            products = Product.objects.all()
+            valid_products = ProductSerializer(products, many=True).data
+            return Response(valid_products, status=status.HTTP_200_OK)
+        else:
+            products = Product.objects.filter(user_id=request.user.id,
+                                              expiration_date__gte=datetime.now(),
+                                              active=True)
+            valid_products = ProductSerializer(products, many=True).data
+            return Response(valid_products, status=status.HTTP_200_OK)
 
     def post(self, request):
         product_serializer = ProductSerializer(data=request.data)
@@ -62,4 +70,5 @@ class ProductApiView(APIView):
             product_serializer.save()
             return Response(product_serializer.data, status=status.HTTP_206_PARTIAL_CONTENT)
         return Response(product_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
