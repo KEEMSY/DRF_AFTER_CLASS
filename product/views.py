@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 
 from product.models import Event, Product
 from product.permissions import IsAuthenticatedANDWritableAfter3DaysOrReadOnly
-from product.serializers import EventSerializer, ProductSerializer
+from product.serializers import EventSerializer, ProductSerializer, ReviewSerializer
 
 
 class EventApiView(APIView):
@@ -71,3 +71,12 @@ class ProductApiView(APIView):
         return Response(product_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ReviewApiView(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def post(self, request):
+        review_serializer = ReviewSerializer(data=request.data)
+        if review_serializer.is_valid():
+            review_serializer.save()
+            return Response({"msg": "Review가 작성되었습니다."}, status=status.HTTP_201_CREATED)
+        return Response(review_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

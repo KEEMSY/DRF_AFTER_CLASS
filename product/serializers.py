@@ -1,10 +1,7 @@
-import pytz
-from datetime import datetime
-
 from django.utils import timezone
 from rest_framework import serializers
 
-from product.models import Event, Product
+from product.models import Event, Product, Review
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -19,10 +16,18 @@ class EventSerializer(serializers.ModelSerializer):
         return instance
 
 
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ["content", "grade"]
+
+
 class ProductSerializer(serializers.ModelSerializer):
+    reviews = ReviewSerializer(many=True, source="review_set")
+
     class Meta:
         model = Product
-        fields = ["explanation", "price", "expiration_date", "active", "user"]
+        fields = ["explanation", "price", "expiration_date", "active", "reviews"]
 
     def validate(self, data):
         if data.get("expiration_date") < timezone.now():
@@ -38,14 +43,11 @@ class ProductSerializer(serializers.ModelSerializer):
         return product
 
     def update(self, instance, validated_data):
-        print('instance: ', instance)
 
         for key, value in validated_data.items():
-            print('key, value: ', key, value)
             if key == "explanation":
                 value = str(f'{timezone.now()}에 수정되었습니다.') + value
 
             setattr(instance, key, value)
         instance.save()
         return instance
-
