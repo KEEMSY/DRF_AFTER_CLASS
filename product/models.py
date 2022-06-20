@@ -37,3 +37,12 @@ class Product(models.Model):
     def change_active(self):
         self.active = not self.active
         self.save()
+
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    content = models.CharField("리뷰 내용", max_length=256)
+    grade = models.IntegerField("평점")
+    created_at = models.DateTimeField(auto_now_add=True)
+
