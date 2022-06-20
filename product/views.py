@@ -12,7 +12,7 @@ from product.models import Event
 from product.serializers import EventSerializer
 
 
-class ProductApiView(APIView):
+class EventApiView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get(self, request):
@@ -36,3 +36,5 @@ class ProductApiView(APIView):
             event_serializer.save()
             return Response(event_serializer.data, status=status.HTTP_206_PARTIAL_CONTENT)
         return Response(event_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
