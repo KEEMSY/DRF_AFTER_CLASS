@@ -49,7 +49,6 @@ class ProductApiView(APIView):
             valid_products = ProductSerializer(products, many=True).data
             return Response(valid_products, status=status.HTTP_200_OK)
         else:
-            print(dir(Product.objects.get(id=17)))
             products = Product.objects.filter(user_id=request.user.id,
                                               expiration_date__gte=timezone.now(),
                                               active=True)
