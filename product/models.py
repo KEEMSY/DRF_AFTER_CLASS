@@ -40,7 +40,7 @@ class Product(models.Model):
 
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     content = models.CharField("리뷰 내용", max_length=256)
     grade = models.IntegerField("평점")

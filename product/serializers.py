@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from django.utils import timezone
 from rest_framework import serializers
 
@@ -23,11 +24,18 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    reviews = ReviewSerializer(many=True, source="review_set")
+    review = serializers.SerializerMethodField()
+
+    def get_review(self, obj):
+        reviews = obj.review_set
+        return {
+            "last_review": ReviewSerializer(reviews.last()).data,
+            "avg_grade": reviews.aggregate(avg=Avg("grade"))["avg"]
+        }
 
     class Meta:
         model = Product
-        fields = ["explanation", "price", "expiration_date", "active", "reviews"]
+        fields = ["explanation", "price", "expiration_date", "active", "review"]
 
     def validate(self, data):
         if data.get("expiration_date") < timezone.now():
